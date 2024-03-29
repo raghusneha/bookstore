@@ -23,8 +23,7 @@ public class BookService {
     public ResponseEntity<String> updateBookService(Book updatedBook, Long id) {
         if (!bookRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Record with ID " + id + " not found.");
-            }
-            else {
+        } else {
             Book book = bookRepository.findById(id).orElseThrow();
             book.setAuthor(updatedBook.getAuthor());
             book.setTitle(updatedBook.getTitle());
@@ -32,7 +31,16 @@ public class BookService {
             bookRepository.save(book);
             return ResponseEntity.ok().body("Record updated successfully");
         }
-
-
     }
-}
+        public ResponseEntity<String> deleteBookService(Long id) {
+            if (!bookRepository.existsById(id)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Record with ID " + id + " not found.");
+            } else {
+                    bookRepository.deleteById(id);
+                return ResponseEntity.ok().body("Record deleted successfully");
+
+            }
+
+        }
+    }
+

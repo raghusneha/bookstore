@@ -26,8 +26,11 @@ public class BookController {
     @PutMapping ("/update/{id}")
     public ResponseEntity<String> updateBook(@RequestBody Book book, @PathVariable Long id)
     {
-        //System.out.println("Book Author "+book.getAuthor());
         return bookService.updateBookService(book,id);
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable Long id){
+        return bookService.deleteBookService(id);
 
+    }
 }
